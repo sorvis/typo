@@ -11,4 +11,4 @@ Background:
 Scenario:
   Given I am on the Dashboard page
   When I follow "Categories"
-  Then I should be on the "Categories" page
+  Then I should be on the Admin Categories page

@@ -13,7 +13,7 @@ module Admin::BaseHelper
 
   def subtab(label, options = {})
     return content_tag :li, "<span class='subtabs'>#{label}</span>".html_safe if options.empty?
-    content_tag :li, link_to(label, options)
+    content_tag :li, link_to(label, options), :id => label
   end
 
   def show_page_heading

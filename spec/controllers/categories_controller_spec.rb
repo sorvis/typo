@@ -9,6 +9,18 @@ describe CategoriesController, "/index" do
     }
   end
 
+  describe "Get index" do
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+
+    it "should set the @categories variable" do
+      get :index
+      assert_not_nil assigns(:categories)
+    end
+  end
+
   describe "normally" do
     before do
       controller.stub(:template_exists?).and_return false

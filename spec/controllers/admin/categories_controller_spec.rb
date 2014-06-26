@@ -62,5 +62,16 @@ describe Admin::CategoriesController do
 
     assert_raise(ActiveRecord::RecordNotFound) { Category.find(test_id) }
   end
+
+  describe "new" do
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template("new")
+    end
+    it "should set the @category variable" do
+      get :new
+      assert_not_nil assigns(:category)
+    end
+  end
   
 end
