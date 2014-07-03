@@ -21,6 +21,8 @@ module NavigationHelpers
       admin_dashboard_path
     when /^the Admin Categories page$/
       '/admin/categories/new'
+    when /^the admin article page for \"(.*)\"$/
+      "/admin/content/edit/#{Article.find_by_title($1).id}"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

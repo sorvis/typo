@@ -13,7 +13,7 @@ Feature: Merge Articles
       | 3  | Foobar 2 | text 2    |
 
   Scenario: Successfully merge articles
-    Given I am on the article page for "Foobar"
+    Given I am on the admin article page for "Foobar"
     And I fill in "merge_with" with "3"
     And I press "Merge"
     Then the article "Foobar" should have body "test art text 2"
