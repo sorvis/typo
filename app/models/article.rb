@@ -36,6 +36,20 @@ class Article < Content
     end
 
   end
+  
+  def merge_with=( id )
+    article = Article.find(id)
+    if article
+        #@body = @body + " " + article.body
+#@body = " " + article.body
+    else
+      raise Exception
+    end
+  end
+
+  def merge_with
+    nil
+  end
 
   with_options(:conditions => { :published => true }, :order => 'created_at DESC') do |this|
     this.has_many :published_comments,   :class_name => "Comment", :order => "created_at ASC"

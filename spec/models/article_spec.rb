@@ -26,6 +26,16 @@ describe Article do
     assert_equal [:body, :extended], a.content_fields
   end
 
+  describe "merge_with" do
+    subject {Article.create(:title => 'foo', :body => 'test body')}
+    it { subject.merge_with.should == nil}
+    it "should merge articles" do
+      newArticle = Article.new(:body => "test 2")
+      newArticle.merge_with = subject.id
+      assert_equal "test 2 test body", newArticle.body
+    end
+  end
+
   describe "#permalink_url" do
     describe "with hostname" do
       subject { Article.new(:permalink => 'article-3', :published_at => Time.new(2004, 6, 1)).permalink_url(anchor=nil, only_path=false) }
