@@ -40,8 +40,7 @@ class Article < Content
   def merge_with=( id )
     article = Article.find(id)
     if article
-        #@body = @body + " " + article.body
-#@body = " " + article.body
+      self.body = self.body + " " + article.body
     else
       raise Exception
     end
