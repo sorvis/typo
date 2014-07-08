@@ -28,10 +28,10 @@ describe Article do
 
   describe "merge_with" do
     subject {Article.create(:title => 'foo', :body => 'test body')}
-    it { subject.merge_with.should == nil}
     it "should merge articles" do
-      newArticle = Article.new(:body => "test 2")
+      newArticle = Article.create(:body => "test 2", :title => 'foo bar')
       newArticle.merge_with = subject.id
+      newArticle.reload
       assert_equal "test 2 test body", newArticle.body
     end
   end

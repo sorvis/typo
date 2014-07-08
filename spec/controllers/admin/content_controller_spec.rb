@@ -3,6 +3,27 @@
 describe Admin::ContentController do
   render_views
 
+  describe 'POST to merge' do
+    before do
+      Factory(:blog)
+      @user = Factory(:user, :profile => Factory(:profile_admin, :label => Profile::ADMIN))
+      request.session = { :user => @user.id }
+      @article = Factory(:article)
+    end
+    it 'should require merge_with id' do
+      post :merge, {:id => @article.id}
+      flash[:notice].should include('merge_with')
+    end
+    it 'should redirct to the edit page' do
+      post :merge, {:id => @article.id}
+      response.should redirect_to :action => :edit, :id => @article.id
+    end
+    it 'should call merge_with on article' do
+      Article.should_receive(:merge_with=).with(@article.id)
+      post :merge, {:id => @article.id}
+    end
+  end
+
   # Like it's a shared, need call everywhere
   shared_examples_for 'index action' do
 

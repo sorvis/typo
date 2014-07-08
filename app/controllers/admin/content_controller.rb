@@ -7,7 +7,13 @@ class Admin::ContentController < Admin::BaseController
   cache_sweeper :blog_sweeper
 
   def merge
-
+    merge_with = params[:merge_with]
+    if merge_with
+      Article.find(params[:id]).merge_with = merge_with
+    else
+      flash[:notice] = "\n merge_with id missing" unless merge_with
+    end
+    redirect_to :action => 'edit', :id => params[:id]
   end
 
   def auto_complete_for_article_keywords

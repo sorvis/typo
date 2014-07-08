@@ -41,13 +41,10 @@ class Article < Content
     article = Article.find(id)
     if article
       self.body = self.body + " " + article.body
+      self.save
     else
       raise Exception
     end
-  end
-
-  def merge_with
-    nil
   end
 
   with_options(:conditions => { :published => true }, :order => 'created_at DESC') do |this|
