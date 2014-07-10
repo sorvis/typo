@@ -34,6 +34,11 @@ describe Article do
       newArticle.reload
       assert_equal "test 2 test body", newArticle.body
     end
+    it "should remove the other article" do
+      newArticle = Article.create(:body => "test 2", :title => 'foo bar')
+      Article.merge_with(newArticle.id, subject.id)
+      Article.exists?(subject.id).should be_false
+    end
   end
 
   describe "#permalink_url" do
