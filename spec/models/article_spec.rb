@@ -30,7 +30,7 @@ describe Article do
     subject {Article.create(:title => 'foo', :body => 'test body')}
     it "should merge articles" do
       newArticle = Article.create(:body => "test 2", :title => 'foo bar')
-      newArticle.merge_with = subject.id
+      Article.merge_with(newArticle.id, subject.id)
       newArticle.reload
       assert_equal "test 2 test body", newArticle.body
     end

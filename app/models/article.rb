@@ -37,14 +37,11 @@ class Article < Content
 
   end
   
-  def merge_with=( id )
-    article = Article.find(id)
-    if article
-      self.body = self.body + " " + article.body
-      self.save
-    else
-      raise Exception
-    end
+  def self.merge_with( original_id, other_id )
+    article = Article.find(original_id)
+    other_article = Article.find(other_id)
+    article.body = article.body + " " + other_article.body
+    article.save
   end
 
   with_options(:conditions => { :published => true }, :order => 'created_at DESC') do |this|

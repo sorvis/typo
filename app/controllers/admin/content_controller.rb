@@ -8,12 +8,13 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     merge_with = params[:merge_with]
+    source_id = params[:source_id]
     if merge_with
-      Article.find(params[:id]).merge_with = merge_with
+      Article.merge_with(source_id, merge_with)
     else
       flash[:notice] = "\n merge_with id missing" unless merge_with
     end
-    redirect_to :action => 'edit', :id => params[:id]
+    redirect_to :action => 'edit', :id => source_id
   end
 
   def auto_complete_for_article_keywords

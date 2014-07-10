@@ -9,6 +9,7 @@ describe Admin::ContentController do
       @user = Factory(:user, :profile => Factory(:profile_admin, :label => Profile::ADMIN))
       request.session = { :user => @user.id }
       @article = Factory(:article)
+      @second_article = Factory(:second_article)
     end
     it 'should require merge_with id' do
       post :merge, {:id => @article.id}
@@ -19,8 +20,8 @@ describe Admin::ContentController do
       response.should redirect_to :action => :edit, :id => @article.id
     end
     it 'should call merge_with on article' do
-      Article.should_receive(:merge_with=).with(@article.id)
-      post :merge, {:id => @article.id}
+      Article.should_receive(:merge_with).with(@article.id, @second_article.id)
+      post :merge, {:source_id => @article.id, :merge_with => @second_article.id}
     end
   end
 

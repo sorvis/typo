@@ -5,6 +5,7 @@
   <%= form_tag(admin_content_merge_url, method: "post") do %>
     <h4><%= _("Merge Articles") %></h4>
     <input name="merge_with" />
+    <%= hidden_field_tag 'source_id', @article.id %>
     <input name="merge" type="submit" value="Merge"/>
   <% end %>
 

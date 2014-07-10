@@ -14,7 +14,7 @@ Feature: Merge Articles
 
   Scenario: Successfully merge articles
     Given I am on the admin article page for "Foobar"
-    And I fill in "merge_with" with "3"
+    And I fill in "merge_with" with id of article titled "Foobar 2"
     And I press "Merge"
     Then the article "Foobar" should have body "test art text 2"
 
